@@ -1,5 +1,5 @@
 import styles from "./MusicList.module.css";
-import { TimeService } from "../../../../services/TimeService";
+import { TimeService } from "../../../../data/services/TimeService";
 
 export default function MusicList(props) {
     function isSelected(music) {

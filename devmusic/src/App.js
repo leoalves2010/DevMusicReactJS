@@ -1,5 +1,6 @@
 import styles from "./App.module.css";
 import Index from "./ui/pages/index";
+import { useApp } from '../src/data/hooks/useApp.page';
 
 function App() {
     return (
