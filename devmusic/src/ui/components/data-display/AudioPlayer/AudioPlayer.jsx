@@ -14,7 +14,7 @@ export default function AudioPlayer(props) {
     );
 
     useEffect(() => {
-        if(props.music) {
+        if (props.music) {
             if (isPlaying) {
                 audioRef.current.play();
             } else {
@@ -42,8 +42,8 @@ export default function AudioPlayer(props) {
     }
 
     function onEnded() {
-        setIsPlaying(false);
-        props?.onComplete();
+        // setIsPlaying(false);
+        props?.onNextMusic();
     }
 
     function changeTime(percent) {
@@ -58,15 +58,37 @@ export default function AudioPlayer(props) {
         }
     }
 
+    function prevMusic() {
+        props?.onPrevMusic();
+    }
+
+    function nextMusic() {
+        props?.onNextMusic();
+    }
+
     return (
         <div className={styles["player-container"]}>
             <div className={styles["button-container"]}>
+                <button
+                    onClick={prevMusic}
+                    className={styles["play-button-prev"]}
+                    disabled={!canPlay}
+                >
+                    {`\u2bec`}
+                </button>
                 <button
                     onClick={handlePlay}
                     className={styles["play-button"]}
                     disabled={!canPlay}
                 >
                     {isPlaying ? `\u2759\u2759` : `\u25B8`}
+                </button>
+                <button
+                    onClick={nextMusic}
+                    className={styles["play-button-next"]}
+                    disabled={!canPlay}
+                >
+                    {`\u2bee`}
                 </button>
             </div>
             <Timeline width={width} onChangeWidth={changeTime} />
