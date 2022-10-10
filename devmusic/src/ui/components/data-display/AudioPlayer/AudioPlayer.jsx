@@ -1,6 +1,13 @@
-import styles from "../AudioPlayer/AudioPlayer.module.css";
 import Timeline from "../../inputs/Timeline/Timeline";
 import { useState, useRef, useEffect, useMemo } from "react";
+import {
+    PlayerContainer,
+    ButtonContainer,
+    PlayButton,
+    PlayButtonNext,
+    PlayButtonPrev,
+    Audio,
+} from "./AudioPlayer.style";
 
 export default function AudioPlayer(props) {
     const [canPlay, setCanPlay] = useState(false);
@@ -42,7 +49,6 @@ export default function AudioPlayer(props) {
     }
 
     function onEnded() {
-        // setIsPlaying(false);
         props?.onNextMusic();
     }
 
@@ -67,39 +73,26 @@ export default function AudioPlayer(props) {
     }
 
     return (
-        <div className={styles["player-container"]}>
-            <div className={styles["button-container"]}>
-                <button
-                    onClick={prevMusic}
-                    className={styles["play-button-prev"]}
-                    disabled={!canPlay}
-                >
+        <PlayerContainer>
+            <ButtonContainer>
+                <PlayButtonPrev onClick={prevMusic} disabled={!canPlay}>
                     {`\u2bec`}
-                </button>
-                <button
-                    onClick={handlePlay}
-                    className={styles["play-button"]}
-                    disabled={!canPlay}
-                >
+                </PlayButtonPrev>
+                <PlayButton onClick={handlePlay} disabled={!canPlay}>
                     {isPlaying ? `\u2759\u2759` : `\u25B8`}
-                </button>
-                <button
-                    onClick={nextMusic}
-                    className={styles["play-button-next"]}
-                    disabled={!canPlay}
-                >
+                </PlayButton>
+                <PlayButtonNext onClick={nextMusic} disabled={!canPlay}>
                     {`\u2bee`}
-                </button>
-            </div>
+                </PlayButtonNext>
+            </ButtonContainer>
             <Timeline width={width} onChangeWidth={changeTime} />
-            <audio
+            <Audio
                 ref={audioRef}
                 controls
-                className={styles["audio"]}
                 onCanPlay={onCanPlay}
                 onEnded={onEnded}
                 src={props?.music?.url}
             />
-        </div>
+        </PlayerContainer>
     );
 }

@@ -2,20 +2,15 @@ import MusicList from "../components/data-display/MusicList/MusicList";
 import AudioPlayer from "../components/data-display/AudioPlayer/AudioPlayer";
 import { useState, useContext } from "react";
 import { AppContext } from "../../App";
-import styles from "./index.module.css";
+import { PageContainer } from "./index.style";
 
 export default function Index() {
     const [width, setWidth] = useState();
-    const {
-        musicList,
-        selectedMusic,
-        selectMusic,
-        prevMusic,
-        nextMusic,
-    } = useContext(AppContext);
+    const { musicList, selectedMusic, selectMusic, prevMusic, nextMusic } =
+        useContext(AppContext);
 
     return (
-        <div className={styles["page-container"]}>
+        <PageContainer>
             <MusicList
                 music={musicList}
                 selectedMusic={selectedMusic}
@@ -28,6 +23,6 @@ export default function Index() {
                 onPrevMusic={prevMusic}
                 onNextMusic={nextMusic}
             />
-        </div>
+        </PageContainer>
     );
 }
